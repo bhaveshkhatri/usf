@@ -8,7 +8,10 @@
     "virtualMachineScaleSets_bkusfvmssmanagers_name": {
       "value": null
     },
-    "autoscalesettings_cpuautoscale_name": {
+    "autoscalesettings_workerscpuautoscale_name": {
+      "value": null
+    },
+    "autoscalesettings_managerscpuautoscale_name": {
       "value": null
     },
     "publicIPAddresses_workersip01_name": {

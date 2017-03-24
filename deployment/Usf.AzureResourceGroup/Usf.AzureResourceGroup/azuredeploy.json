@@ -10,8 +10,12 @@
       "defaultValue": "bkusfvmssmanagers",
       "type": "String"
     },
-    "autoscalesettings_cpuautoscale_name": {
-      "defaultValue": "cpuautoscale",
+    "autoscalesettings_workerscpuautoscale_name": {
+      "defaultValue": "workerscpuautoscale",
+      "type": "String"
+    },
+    "autoscalesettings_managerscpuautoscale_name": {
+      "defaultValue": "managerscpuautoscale",
       "type": "String"
     },
     "publicIPAddresses_workersip01_name": {
@@ -173,7 +177,7 @@
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/microsoft.insights/autoscalesettings/cpuautoscale'.",
       "type": "microsoft.insights/autoscalesettings",
-      "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+      "name": "[parameters('autoscalesettings_workerscpuautoscale_name')]",
       "apiVersion": "2014-04-01",
       "location": "westus",
       "tags": {},
@@ -229,7 +233,7 @@
           }
         ],
         "enabled": true,
-        "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+        "name": "[parameters('autoscalesettings_workerscpuautoscale_name')]",
         "targetResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssworkers_name'))]"
       },
       "dependsOn": [
@@ -397,7 +401,7 @@
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/microsoft.insights/autoscalesettings/cpuautoscale'.",
       "type": "microsoft.insights/autoscalesettings",
-      "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+      "name": "[parameters('autoscalesettings_managerscpuautoscale_name')]",
       "apiVersion": "2014-04-01",
       "location": "westus",
       "tags": {},
@@ -453,7 +457,7 @@
           }
         ],
         "enabled": true,
-        "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+        "name": "[parameters('autoscalesettings_managerscpuautoscale_name')]",
         "targetResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssmanagers_name'))]"
       },
       "dependsOn": [
