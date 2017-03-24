@@ -1,8 +1,358 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {},
-  "variables": {},
-  "resources": [],
-  "outputs": {}
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "parametersNoManaged": {
+            "username": {
+                "value": "[parameters('username')]"
+            },
+            "instanceCount": {
+                "value": "[parameters('instanceCount')]"
+            },
+            "authenticationType": {
+                "value": "[parameters('authenticationType')]"
+            },
+            "vmssName": {
+                "value": "[parameters('vmssName')]"
+            },
+            "pipName": {
+                "value": "[parameters('pipName')]"
+            },
+            "image": {
+                "value": "[parameters('image')]"
+            },
+            "pipLabel": {
+                "value": "[parameters('pipLabel')]"
+            },
+            "vmSku": {
+                "value": "[parameters('vmSku')]"
+            },
+            "location": {
+                "value": "[parameters('location')]"
+            },
+            "osType": {
+                "value": "[parameters('osType')]"
+            },
+            "password": {
+                "value": "[parameters('password')]"
+            },
+            "sshPublicKey": {
+                "value": "[parameters('sshPublicKey')]"
+            }
+        },
+        "baseTemplateUri": "[concat(parameters('baseUrl'), '/')]",
+        "diskType": "[variables(concat('diskType', parameters('singlePlacementGroup')))]",
+        "parametersYesManaged": {
+            "username": {
+                "value": "[parameters('username')]"
+            },
+            "autoscaleDefault": {
+                "value": "[parameters('autoscaleDefault')]"
+            },
+            "instanceCount": {
+                "value": "[parameters('instanceCount')]"
+            },
+            "authenticationType": {
+                "value": "[parameters('authenticationType')]"
+            },
+            "scaleOutInterval": {
+                "value": "[parameters('scaleOutInterval')]"
+            },
+            "vmssName": {
+                "value": "[parameters('vmssName')]"
+            },
+            "pipName": {
+                "value": "[parameters('pipName')]"
+            },
+            "image": {
+                "value": "[parameters('image')]"
+            },
+            "pipLabel": {
+                "value": "[parameters('pipLabel')]"
+            },
+            "scaleInCPUPercentageThreshold": {
+                "value": "[int(parameters('scaleInCPUPercentageThreshold'))]"
+            },
+            "scaleOutCPUPercentageThreshold": {
+                "value": "[int(parameters('scaleOutCPUPercentageThreshold'))]"
+            },
+            "vmSku": {
+                "value": "[parameters('vmSku')]"
+            },
+            "location": {
+                "value": "[parameters('location')]"
+            },
+            "autoscaleMin": {
+                "value": "[parameters('autoscaleMin')]"
+            },
+            "autoscaleMax": {
+                "value": "[parameters('autoscaleMax')]"
+            },
+            "osType": {
+                "value": "[parameters('osType')]"
+            },
+            "password": {
+                "value": "[parameters('password')]"
+            },
+            "sshPublicKey": {
+                "value": "[parameters('sshPublicKey')]"
+            },
+            "scaleInInterval": {
+                "value": "[parameters('scaleInInterval')]"
+            }
+        },
+        "diskTypefalse": "Managed",
+        "parametersNoUnmanaged": {
+            "username": {
+                "value": "[parameters('username')]"
+            },
+            "instanceCount": {
+                "value": "[parameters('instanceCount')]"
+            },
+            "authenticationType": {
+                "value": "[parameters('authenticationType')]"
+            },
+            "vmssName": {
+                "value": "[parameters('vmssName')]"
+            },
+            "pipName": {
+                "value": "[parameters('pipName')]"
+            },
+            "image": {
+                "value": "[parameters('image')]"
+            },
+            "pipLabel": {
+                "value": "[parameters('pipLabel')]"
+            },
+            "vmSku": {
+                "value": "[parameters('vmSku')]"
+            },
+            "location": {
+                "value": "[parameters('location')]"
+            },
+            "osType": {
+                "value": "[parameters('osType')]"
+            },
+            "password": {
+                "value": "[parameters('password')]"
+            },
+            "sshPublicKey": {
+                "value": "[parameters('sshPublicKey')]"
+            }
+        },
+        "diskTypetrue": "[parameters('diskTypeIfSmall')]",
+        "parametersYesUnmanaged": {
+            "username": {
+                "value": "[parameters('username')]"
+            },
+            "autoscaleDefault": {
+                "value": "[parameters('autoscaleDefault')]"
+            },
+            "instanceCount": {
+                "value": "[parameters('instanceCount')]"
+            },
+            "authenticationType": {
+                "value": "[parameters('authenticationType')]"
+            },
+            "scaleOutInterval": {
+                "value": "[parameters('scaleOutInterval')]"
+            },
+            "vmssName": {
+                "value": "[parameters('vmssName')]"
+            },
+            "pipName": {
+                "value": "[parameters('pipName')]"
+            },
+            "image": {
+                "value": "[parameters('image')]"
+            },
+            "pipLabel": {
+                "value": "[parameters('pipLabel')]"
+            },
+            "scaleInCPUPercentageThreshold": {
+                "value": "[int(parameters('scaleInCPUPercentageThreshold'))]"
+            },
+            "scaleOutCPUPercentageThreshold": {
+                "value": "[int(parameters('scaleOutCPUPercentageThreshold'))]"
+            },
+            "vmSku": {
+                "value": "[parameters('vmSku')]"
+            },
+            "location": {
+                "value": "[parameters('location')]"
+            },
+            "autoscaleMin": {
+                "value": "[parameters('autoscaleMin')]"
+            },
+            "autoscaleMax": {
+                "value": "[parameters('autoscaleMax')]"
+            },
+            "osType": {
+                "value": "[parameters('osType')]"
+            },
+            "password": {
+                "value": "[parameters('password')]"
+            },
+            "sshPublicKey": {
+                "value": "[parameters('sshPublicKey')]"
+            },
+            "scaleInInterval": {
+                "value": "[parameters('scaleInInterval')]"
+            }
+        }
+    },
+    "parameters": {
+        "autoscaleDefault": {
+            "defaultValue": "1",
+            "type": "string",
+            "metadata": {
+                "description": "Autoscale will ensure you have at least this many VMs, even if it cannot read from the diagnostics Storage Table."
+            }
+        },
+        "scaleInCPUPercentageThreshold": {
+            "defaultValue": "25",
+            "type": "string"
+        },
+        "authenticationType": {
+            "metadata": {
+                "description": "password or sshPublicKey"
+            },
+            "type": "string",
+            "allowedValues": [
+                "password",
+                "sshPublicKey"
+            ]
+        },
+        "image": {
+            "type": "string",
+            "metadata": {
+                "description": "The os disk image for the VMs in the scale set."
+            }
+        },
+        "instanceCount": {
+            "type": "string",
+            "metadata": {
+                "description": "Number of VM instances (100 or less)."
+            }
+        },
+        "osType": {
+            "type": "string",
+            "allowedValues": [
+                "Windows",
+                "Linux"
+            ]
+        },
+        "scaleInInterval": {
+            "defaultValue": "1",
+            "type": "string"
+        },
+        "diskTypeIfSmall": {
+            "defaultValue": "Unmanaged",
+            "type": "string",
+            "allowedValues": [
+                "Managed",
+                "Unmanaged"
+            ]
+        },
+        "pipName": {
+            "type": "string"
+        },
+        "baseUrl": {
+            "defaultValue": "https://gallery.azure.com/artifact/20151001/microsoft.vmss.4.0.0/Artifacts",
+            "type": "string",
+            "metadata": {
+                "artifactsBaseUrl": "Base URL of the VMSS Template gallery package"
+            }
+        },
+        "singlePlacementGroup": {
+            "defaultValue": "true",
+            "type": "string",
+            "allowedValues": [
+                "true",
+                "false"
+            ]
+        },
+        "autoscaleYesOrNo": {
+            "defaultValue": "No",
+            "type": "string",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ]
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "location of resources"
+            }
+        },
+        "username": {
+            "type": "string",
+            "metadata": {
+                "description": "Admin username on all VMs."
+            }
+        },
+        "scaleOutInterval": {
+            "defaultValue": "1",
+            "type": "string"
+        },
+        "vmSku": {
+            "defaultValue": "Standard_D1_v2",
+            "type": "string",
+            "metadata": {
+                "description": "Size of VMs in the VM Scale Set."
+            }
+        },
+        "autoscaleMin": {
+            "defaultValue": "1",
+            "type": "string"
+        },
+        "autoscaleMax": {
+            "defaultValue": "10",
+            "type": "string"
+        },
+        "pipLabel": {
+            "type": "string"
+        },
+        "password": {
+            "defaultValue": "",
+            "type": "securestring",
+            "metadata": {
+                "description": "Admin password on all VMs."
+            }
+        },
+        "scaleOutCPUPercentageThreshold": {
+            "defaultValue": "75",
+            "type": "string"
+        },
+        "vmssName": {
+            "maxLength": 61,
+            "type": "string",
+            "metadata": {
+                "description": "String used as a base for naming resources. Must be 3-61 characters in length and globally unique across Azure. A hash is prepended to this string for some resources, and resource-specific information is appended."
+            }
+        },
+        "sshPublicKey": {
+            "defaultValue": "",
+            "type": "string",
+            "metadata": {
+                "description": "ssh public key for connecting to VMs."
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "name": "scaleSetPortalDeployment",
+            "apiVersion": "2015-11-01",
+            "properties": {
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[concat(variables('baseTemplateUri'), parameters('autoscaleYesOrNo'), variables('diskType'), parameters('singlePlacementGroup'), '.json')]"
+                },
+                "mode": "Incremental",
+                "parameters": "[variables(concat('parameters', parameters('autoscaleYesOrNo'), variables('diskType')))]"
+            }
+        }
+    ]
 }

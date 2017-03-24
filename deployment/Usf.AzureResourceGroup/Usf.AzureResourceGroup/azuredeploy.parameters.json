@@ -1,6 +1,69 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-  }
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "autoscaleDefault": {
+            "value": "1"
+        },
+        "scaleInCPUPercentageThreshold": {
+            "value": "25"
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "image": {
+            "value": "2016-Datacenter-with-Containers"
+        },
+        "vmSku": {
+            "value": "Standard_D2"
+        },
+        "osType": {
+            "value": "Windows"
+        },
+        "scaleInInterval": {
+            "value": "1"
+        },
+        "diskTypeIfSmall": {
+            "value": "Unmanaged"
+        },
+        "pipName": {
+            "value": "ip01"
+        },
+        "singlePlacementGroup": {
+            "value": "true"
+        },
+        "autoscaleYesOrNo": {
+            "value": "Yes"
+        },
+        "location": {
+            "value": "southcentralus"
+        },
+        "username": {
+            "value": "bkhatri"
+        },
+        "scaleOutInterval": {
+            "value": "1"
+        },
+        "instanceCount": {
+            "value": "1"
+        },
+        "autoscaleMin": {
+            "value": "1"
+        },
+        "autoscaleMax": {
+            "value": "3"
+        },
+        "pipLabel": {
+            "value": "bkusfworkers"
+        },
+        "password": {
+            "value": null
+        },
+        "scaleOutCPUPercentageThreshold": {
+            "value": "75"
+        },
+        "vmssName": {
+            "value": "bkusfvmssworkers"
+        }
+    }
 }
