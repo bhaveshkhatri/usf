@@ -5,13 +5,16 @@
     "virtualMachineScaleSets_bkusfvmssworkers_name": {
       "value": null
     },
+    "virtualMachineScaleSets_bkusfvmssmanagers_name": {
+      "value": null
+    },
     "autoscalesettings_cpuautoscale_name": {
       "value": null
     },
-    "loadBalancers_bkusfvmsslb_name": {
+    "publicIPAddresses_workersip01_name": {
       "value": null
     },
-    "publicIPAddresses_ip01_name": {
+    "publicIPAddresses_managersip01_name": {
       "value": null
     },
     "virtualNetworks_bkusfvmssvnet_name": {
@@ -32,10 +35,31 @@
     "storageAccounts_znszild7m5bzobkusfvmsssa_name": {
       "value": null
     },
-    "loadBalancers_bkusfvmsslb_id": {
+    "storageAccounts_3zlluaecvyreybkusfvmsssa_name": {
       "value": null
     },
-    "loadBalancers_bkusfvmsslb_id_1": {
+    "storageAccounts_ulrydnnvkua7wbkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_xmhqhrgw4hf6ibkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_zkp7vciux4txibkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_anszild7m5bzobkusfvmsssa_name": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmssworkerslb_name": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmssworkerslb_id": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmssmanagerslb_name": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmssmanagerslb_id": {
       "value": null
     }
   }

@@ -6,16 +6,20 @@
       "defaultValue": "bkusfvmssworkers",
       "type": "String"
     },
+    "virtualMachineScaleSets_bkusfvmssmanagers_name": {
+      "defaultValue": "bkusfvmssmanagers",
+      "type": "String"
+    },
     "autoscalesettings_cpuautoscale_name": {
       "defaultValue": "cpuautoscale",
       "type": "String"
     },
-    "loadBalancers_bkusfvmsslb_name": {
-      "defaultValue": "bkusfvmsslb",
+    "publicIPAddresses_workersip01_name": {
+      "defaultValue": "ip01workersip01",
       "type": "String"
     },
-    "publicIPAddresses_ip01_name": {
-      "defaultValue": "ip01",
+    "publicIPAddresses_managersip01_name": {
+      "defaultValue": "managersip01",
       "type": "String"
     },
     "virtualNetworks_bkusfvmssvnet_name": {
@@ -42,17 +46,46 @@
       "defaultValue": "znszild7m5bzobkusfvmsssa",
       "type": "String"
     },
-    "loadBalancers_bkusfvmsslb_id": {
-      "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmsslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+    "storageAccounts_3zlluaecvyreybkusfvmsssa_name": {
+      "defaultValue": "3zlluaecvyreybkusfvmsssa",
       "type": "String"
     },
-    "loadBalancers_bkusfvmsslb_id_1": {
-      "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmsslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+    "storageAccounts_ulrydnnvkua7wbkusfvmsssa_name": {
+      "defaultValue": "ulrydnnvkua7wbkusfvmsssa",
+      "type": "String"
+    },
+    "storageAccounts_xmhqhrgw4hf6ibkusfvmsssa_name": {
+      "defaultValue": "xmhqhrgw4hf6ibkusfvmsssa",
+      "type": "String"
+    },
+    "storageAccounts_zkp7vciux4txibkusfvmsssa_name": {
+      "defaultValue": "zkp7vciux4txibkusfvmsssa",
+      "type": "String"
+    },
+    "storageAccounts_anszild7m5bzobkusfvmsssa_name": {
+      "defaultValue": "anszild7m5bzobkusfvmsssa",
+      "type": "String"
+    },
+    "loadBalancers_bkusfvmssworkerslb_name": {
+      "defaultValue": "bkusfvmssworkerslb",
+      "type": "String"
+    },
+    "loadBalancers_bkusfvmssworkerslb_id": {
+      "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmssworkerslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+      "type": "String"
+    },
+    "loadBalancers_bkusfvmssmanagerslb_name": {
+      "defaultValue": "bkusfvmssmanagerslb",
+      "type": "String"
+    },
+    "loadBalancers_bkusfvmssmanagerslb_id": {
+      "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmssmanagerslb/frontendIPConfigurations/LoadBalancerFrontEnd",
       "type": "String"
     }
   },
   "variables": {},
   "resources": [
+    //WORKERS
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Compute/virtualMachineScaleSets/bkusfvmssworkers'.",
       "type": "Microsoft.Compute/virtualMachineScaleSets",
@@ -71,7 +104,7 @@
         },
         "virtualMachineProfile": {
           "osProfile": {
-            "computerNamePrefix": "bkusfvmss",
+            "computerNamePrefix": "bkusfvmssworkers",
             "adminUsername": "bkhatri",
             "windowsConfiguration": {
               "provisionVMAgent": true,
@@ -88,7 +121,7 @@
                 "https://wmhqhrgw4hf6ibkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
                 "https://znszild7m5bzobkusfvmsssa.blob.core.windows.net/bkusfvmssvhd"
               ],
-              "name": "bkusfvmssosdisk",
+              "name": "bkusfvmssworkersosdisk",
               "createOption": "FromImage",
               "caching": "ReadOnly"
             },
@@ -114,12 +147,12 @@
                         },
                         "loadBalancerBackendAddressPools": [
                           {
-                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmsslb_name')), '/backendAddressPools/bkusfvmssbepool')]"
+                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name')), '/backendAddressPools/bkusfvmssbepool')]"
                           }
                         ],
                         "loadBalancerInboundNatPools": [
                           {
-                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmsslb_name')), '/inboundNatPools/bkusfvmssnatpool')]"
+                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name')), '/inboundNatPools/bkusfvmssnatpool')]"
                           }
                         ]
                       }
@@ -134,7 +167,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
-        "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmsslb_name'))]"
+        "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name'))]"
       ]
     },
     {
@@ -206,7 +239,7 @@
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmsslb'.",
       "type": "Microsoft.Network/loadBalancers",
-      "name": "[parameters('loadBalancers_bkusfvmsslb_name')]",
+      "name": "[parameters('loadBalancers_bkusfvmssworkerslb_name')]",
       "apiVersion": "2016-03-30",
       "location": "southcentralus",
       "properties": {
@@ -216,7 +249,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip01_name'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_workersip01_name'))]"
               }
             }
           }
@@ -233,7 +266,7 @@
             "name": "bkusfvmssnatpool.0",
             "properties": {
               "frontendIPConfiguration": {
-                "id": "[parameters('loadBalancers_bkusfvmsslb_id')]"
+                "id": "[parameters('loadBalancers_bkusfvmssworkerslb_id')]"
               },
               "frontendPort": 50000,
               "backendPort": 3389,
@@ -251,20 +284,20 @@
               "backendPort": 3389,
               "protocol": "Tcp",
               "frontendIPConfiguration": {
-                "id": "[parameters('loadBalancers_bkusfvmsslb_id_1')]"
+                "id": "[parameters('loadBalancers_bkusfvmssworkerslb_id')]"
               }
             }
           }
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip01_name'))]"
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_workersip01_name'))]"
       ]
     },
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/publicIPAddresses/ip01'.",
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('publicIPAddresses_ip01_name')]",
+      "name": "[parameters('publicIPAddresses_workersip01_name')]",
       "apiVersion": "2016-03-30",
       "location": "southcentralus",
       "properties": {
@@ -276,6 +309,231 @@
       },
       "dependsOn": []
     },
+    //MANGERS
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Compute/virtualMachineScaleSets/bkusfvmssmanagers'.",
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      "sku": {
+        "name": "Standard_D2",
+        "tier": "Standard",
+        "capacity": 1
+      },
+      "name": "[parameters('virtualMachineScaleSets_bkusfvmssmanagers_name')]",
+      "apiVersion": "2016-04-30-preview",
+      "location": "southcentralus",
+      "properties": {
+        "singlePlacementGroup": true,
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "osProfile": {
+            "computerNamePrefix": "bkusfvmssmanagers",
+            "adminUsername": "bkhatri",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            },
+            "secrets": []
+          },
+          "storageProfile": {
+            "osDisk": {
+              "vhdContainers": [
+                "https://3zlluaecvyreybkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                "https://ulrydnnvkua7wbkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                "https://vkp7vciux4txibkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                "https://xmhqhrgw4hf6ibkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                "https://anszild7m5bzobkusfvmsssa.blob.core.windows.net/bkusfvmssvhd"
+              ],
+              "name": "bkusfvmssmanagersosdisk",
+              "createOption": "FromImage",
+              "caching": "ReadOnly"
+            },
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2016-Datacenter-with-Containers",
+              "version": "latest"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "bkusfvmssnic",
+                "properties": {
+                  "primary": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "bkusfvmssipconfig",
+                      "properties": {
+                        "subnet": {
+                          "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name')), '/subnets/bkusfvmsssubnet')]"
+                        },
+                        "loadBalancerBackendAddressPools": [
+                          {
+                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssmanagerslb_name')), '/backendAddressPools/bkusfvmssbepool')]"
+                          }
+                        ],
+                        "loadBalancerInboundNatPools": [
+                          {
+                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssmanagerslb_name')), '/inboundNatPools/bkusfvmssnatpool')]"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "overprovision": true
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
+        "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssmanagerslb_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/microsoft.insights/autoscalesettings/cpuautoscale'.",
+      "type": "microsoft.insights/autoscalesettings",
+      "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+      "apiVersion": "2014-04-01",
+      "location": "westus",
+      "tags": {},
+      "properties": {
+        "profiles": [
+          {
+            "name": "Profile1",
+            "capacity": {
+              "minimum": "1",
+              "maximum": "3",
+              "default": "1"
+            },
+            "rules": [
+              {
+                "metricTrigger": {
+                  "metricName": "Percentage CPU",
+                  "metricNamespace": "",
+                  "metricResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssmanagers_name'))]",
+                  "timeGrain": "PT1M",
+                  "statistic": "Average",
+                  "timeWindow": "PT5M",
+                  "timeAggregation": "Average",
+                  "operator": "GreaterThan",
+                  "threshold": 75
+                },
+                "scaleAction": {
+                  "direction": "Increase",
+                  "type": "ChangeCount",
+                  "value": "1",
+                  "cooldown": "PT1M"
+                }
+              },
+              {
+                "metricTrigger": {
+                  "metricName": "Percentage CPU",
+                  "metricNamespace": "",
+                  "metricResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssmanagers_name'))]",
+                  "timeGrain": "PT1M",
+                  "statistic": "Average",
+                  "timeWindow": "PT5M",
+                  "timeAggregation": "Average",
+                  "operator": "LessThan",
+                  "threshold": 25
+                },
+                "scaleAction": {
+                  "direction": "Decrease",
+                  "type": "ChangeCount",
+                  "value": "1",
+                  "cooldown": "PT1M"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": true,
+        "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+        "targetResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssmanagers_name'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssmanagers_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmssmanagerslb'.",
+      "type": "Microsoft.Network/loadBalancers",
+      "name": "[parameters('loadBalancers_bkusfvmssmanagerslb_name')]",
+      "apiVersion": "2016-03-30",
+      "location": "southcentralus",
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_managersip01_name'))]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "bkusfvmssbepool"
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [],
+        "inboundNatRules": [
+          {
+            "name": "bkusfvmssnatpool.0",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[parameters('loadBalancers_bkusfvmssmanagerslb_id')]"
+              },
+              "frontendPort": 50000,
+              "backendPort": 3389,
+              "protocol": "Tcp"
+            }
+          }
+        ],
+        "outboundNatRules": [],
+        "inboundNatPools": [
+          {
+            "name": "bkusfvmssnatpool",
+            "properties": {
+              "frontendPortRangeStart": 50000,
+              "frontendPortRangeEnd": 50119,
+              "backendPort": 3389,
+              "protocol": "Tcp",
+              "frontendIPConfiguration": {
+                "id": "[parameters('loadBalancers_bkusfvmssmanagerslb_id')]"
+              }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_managersip01_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/publicIPAddresses/ip01'.",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('publicIPAddresses_managersip01_name')]",
+      "apiVersion": "2016-03-30",
+      "location": "southcentralus",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "idleTimeoutInMinutes": 4,
+        "dnsSettings": {
+          "domainNameLabel": "bkusfmanagers"
+        }
+      },
+      "dependsOn": []
+    },
+    //VIRTUAL NETWORK
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/virtualNetworks/bkusfvmssvnet'.",
       "type": "Microsoft.Network/virtualNetworks",
@@ -299,6 +557,7 @@
       },
       "dependsOn": []
     },
+    //STORAGE ACCOUNTS - WORKERS
     {
       "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/2zlluaecvyreybkusfvmsssa'.",
       "type": "Microsoft.Storage/storageAccounts",
@@ -308,6 +567,82 @@
       },
       "kind": "Storage",
       "name": "[parameters('storageAccounts_2zlluaecvyreybkusfvmsssa_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "southcentralus",
+      "tags": {},
+      "properties": {},
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/tlrydnnvkua7wbkusfvmsssa'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_tlrydnnvkua7wbkusfvmsssa_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "southcentralus",
+      "tags": {},
+      "properties": {},
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/wmhqhrgw4hf6ibkusfvmsssa'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_wmhqhrgw4hf6ibkusfvmsssa_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "southcentralus",
+      "tags": {},
+      "properties": {},
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/ykp7vciux4txibkusfvmsssa'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_ykp7vciux4txibkusfvmsssa_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "southcentralus",
+      "tags": {},
+      "properties": {},
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/znszild7m5bzobkusfvmsssa'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_znszild7m5bzobkusfvmsssa_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "southcentralus",
+      "tags": {},
+      "properties": {},
+      "dependsOn": []
+    },
+    //STORAGE ACCOUNTS - MANAGERS
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/3zlluaecvyreybkusfvmsssa'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_3zlluaecvyreybkusfvmsssa_name')]",
       "apiVersion": "2016-01-01",
       "location": "southcentralus",
       "tags": {},
