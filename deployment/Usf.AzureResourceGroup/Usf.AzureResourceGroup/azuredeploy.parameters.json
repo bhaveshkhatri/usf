@@ -20,34 +20,34 @@
     "virtualNetworks_bkusfvmssvnet_name": {
       "value": null
     },
-    "storageAccounts_2zlluaecvyreybkusfvmsssa_name": {
+    "storageAccounts_workers01_name": {
       "value": null
     },
-    "storageAccounts_tlrydnnvkua7wbkusfvmsssa_name": {
+    "storageAccounts_workers02_name": {
       "value": null
     },
-    "storageAccounts_wmhqhrgw4hf6ibkusfvmsssa_name": {
+    "storageAccounts_workers03_name": {
       "value": null
     },
-    "storageAccounts_ykp7vciux4txibkusfvmsssa_name": {
+    "storageAccounts_workers04_name": {
       "value": null
     },
-    "storageAccounts_znszild7m5bzobkusfvmsssa_name": {
+    "storageAccounts_workers05_name": {
       "value": null
     },
-    "storageAccounts_3zlluaecvyreybkusfvmsssa_name": {
+    "storageAccounts_managers01_name": {
       "value": null
     },
-    "storageAccounts_ulrydnnvkua7wbkusfvmsssa_name": {
+    "storageAccounts_managers02_name": {
       "value": null
     },
-    "storageAccounts_xmhqhrgw4hf6ibkusfvmsssa_name": {
+    "storageAccounts_managers03_name": {
       "value": null
     },
-    "storageAccounts_zkp7vciux4txibkusfvmsssa_name": {
+    "storageAccounts_managers04_name": {
       "value": null
     },
-    "storageAccounts_anszild7m5bzobkusfvmsssa_name": {
+    "storageAccounts_managers05_name": {
       "value": null
     },
     "loadBalancers_bkusfvmssworkerslb_name": {
