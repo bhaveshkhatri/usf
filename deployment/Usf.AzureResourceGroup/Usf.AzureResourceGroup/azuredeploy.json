@@ -152,7 +152,12 @@
         "overprovision": true
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers01_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers02_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers03_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers04_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers05_name'))]"
       ]
     },
     {
@@ -318,7 +323,12 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
-        "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssmanagerslb_name'))]"
+        "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssmanagerslb_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_managers01_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_managers02_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_managers03_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_managers04_name'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_managers05_name'))]"
       ]
     },
     {
