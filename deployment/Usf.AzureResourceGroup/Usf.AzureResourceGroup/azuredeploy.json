@@ -1,358 +1,378 @@
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "variables": {
-        "parametersNoManaged": {
-            "username": {
-                "value": "[parameters('username')]"
-            },
-            "instanceCount": {
-                "value": "[parameters('instanceCount')]"
-            },
-            "authenticationType": {
-                "value": "[parameters('authenticationType')]"
-            },
-            "vmssName": {
-                "value": "[parameters('vmssName')]"
-            },
-            "pipName": {
-                "value": "[parameters('pipName')]"
-            },
-            "image": {
-                "value": "[parameters('image')]"
-            },
-            "pipLabel": {
-                "value": "[parameters('pipLabel')]"
-            },
-            "vmSku": {
-                "value": "[parameters('vmSku')]"
-            },
-            "location": {
-                "value": "[parameters('location')]"
-            },
-            "osType": {
-                "value": "[parameters('osType')]"
-            },
-            "password": {
-                "value": "[parameters('password')]"
-            },
-            "sshPublicKey": {
-                "value": "[parameters('sshPublicKey')]"
-            }
-        },
-        "baseTemplateUri": "[concat(parameters('baseUrl'), '/')]",
-        "diskType": "[variables(concat('diskType', parameters('singlePlacementGroup')))]",
-        "parametersYesManaged": {
-            "username": {
-                "value": "[parameters('username')]"
-            },
-            "autoscaleDefault": {
-                "value": "[parameters('autoscaleDefault')]"
-            },
-            "instanceCount": {
-                "value": "[parameters('instanceCount')]"
-            },
-            "authenticationType": {
-                "value": "[parameters('authenticationType')]"
-            },
-            "scaleOutInterval": {
-                "value": "[parameters('scaleOutInterval')]"
-            },
-            "vmssName": {
-                "value": "[parameters('vmssName')]"
-            },
-            "pipName": {
-                "value": "[parameters('pipName')]"
-            },
-            "image": {
-                "value": "[parameters('image')]"
-            },
-            "pipLabel": {
-                "value": "[parameters('pipLabel')]"
-            },
-            "scaleInCPUPercentageThreshold": {
-                "value": "[int(parameters('scaleInCPUPercentageThreshold'))]"
-            },
-            "scaleOutCPUPercentageThreshold": {
-                "value": "[int(parameters('scaleOutCPUPercentageThreshold'))]"
-            },
-            "vmSku": {
-                "value": "[parameters('vmSku')]"
-            },
-            "location": {
-                "value": "[parameters('location')]"
-            },
-            "autoscaleMin": {
-                "value": "[parameters('autoscaleMin')]"
-            },
-            "autoscaleMax": {
-                "value": "[parameters('autoscaleMax')]"
-            },
-            "osType": {
-                "value": "[parameters('osType')]"
-            },
-            "password": {
-                "value": "[parameters('password')]"
-            },
-            "sshPublicKey": {
-                "value": "[parameters('sshPublicKey')]"
-            },
-            "scaleInInterval": {
-                "value": "[parameters('scaleInInterval')]"
-            }
-        },
-        "diskTypefalse": "Managed",
-        "parametersNoUnmanaged": {
-            "username": {
-                "value": "[parameters('username')]"
-            },
-            "instanceCount": {
-                "value": "[parameters('instanceCount')]"
-            },
-            "authenticationType": {
-                "value": "[parameters('authenticationType')]"
-            },
-            "vmssName": {
-                "value": "[parameters('vmssName')]"
-            },
-            "pipName": {
-                "value": "[parameters('pipName')]"
-            },
-            "image": {
-                "value": "[parameters('image')]"
-            },
-            "pipLabel": {
-                "value": "[parameters('pipLabel')]"
-            },
-            "vmSku": {
-                "value": "[parameters('vmSku')]"
-            },
-            "location": {
-                "value": "[parameters('location')]"
-            },
-            "osType": {
-                "value": "[parameters('osType')]"
-            },
-            "password": {
-                "value": "[parameters('password')]"
-            },
-            "sshPublicKey": {
-                "value": "[parameters('sshPublicKey')]"
-            }
-        },
-        "diskTypetrue": "[parameters('diskTypeIfSmall')]",
-        "parametersYesUnmanaged": {
-            "username": {
-                "value": "[parameters('username')]"
-            },
-            "autoscaleDefault": {
-                "value": "[parameters('autoscaleDefault')]"
-            },
-            "instanceCount": {
-                "value": "[parameters('instanceCount')]"
-            },
-            "authenticationType": {
-                "value": "[parameters('authenticationType')]"
-            },
-            "scaleOutInterval": {
-                "value": "[parameters('scaleOutInterval')]"
-            },
-            "vmssName": {
-                "value": "[parameters('vmssName')]"
-            },
-            "pipName": {
-                "value": "[parameters('pipName')]"
-            },
-            "image": {
-                "value": "[parameters('image')]"
-            },
-            "pipLabel": {
-                "value": "[parameters('pipLabel')]"
-            },
-            "scaleInCPUPercentageThreshold": {
-                "value": "[int(parameters('scaleInCPUPercentageThreshold'))]"
-            },
-            "scaleOutCPUPercentageThreshold": {
-                "value": "[int(parameters('scaleOutCPUPercentageThreshold'))]"
-            },
-            "vmSku": {
-                "value": "[parameters('vmSku')]"
-            },
-            "location": {
-                "value": "[parameters('location')]"
-            },
-            "autoscaleMin": {
-                "value": "[parameters('autoscaleMin')]"
-            },
-            "autoscaleMax": {
-                "value": "[parameters('autoscaleMax')]"
-            },
-            "osType": {
-                "value": "[parameters('osType')]"
-            },
-            "password": {
-                "value": "[parameters('password')]"
-            },
-            "sshPublicKey": {
-                "value": "[parameters('sshPublicKey')]"
-            },
-            "scaleInInterval": {
-                "value": "[parameters('scaleInInterval')]"
-            }
-        }
-    },
     "parameters": {
-        "autoscaleDefault": {
-            "defaultValue": "1",
-            "type": "string",
-            "metadata": {
-                "description": "Autoscale will ensure you have at least this many VMs, even if it cannot read from the diagnostics Storage Table."
-            }
+        "virtualMachineScaleSets_bkusfvmssworkers_name": {
+            "defaultValue": "bkusfvmssworkers",
+            "type": "String"
         },
-        "scaleInCPUPercentageThreshold": {
-            "defaultValue": "25",
-            "type": "string"
+        "autoscalesettings_cpuautoscale_name": {
+            "defaultValue": "cpuautoscale",
+            "type": "String"
         },
-        "authenticationType": {
-            "metadata": {
-                "description": "password or sshPublicKey"
-            },
-            "type": "string",
-            "allowedValues": [
-                "password",
-                "sshPublicKey"
-            ]
+        "loadBalancers_bkusfvmsslb_name": {
+            "defaultValue": "bkusfvmsslb",
+            "type": "String"
         },
-        "image": {
-            "type": "string",
-            "metadata": {
-                "description": "The os disk image for the VMs in the scale set."
-            }
+        "publicIPAddresses_ip01_name": {
+            "defaultValue": "ip01",
+            "type": "String"
         },
-        "instanceCount": {
-            "type": "string",
-            "metadata": {
-                "description": "Number of VM instances (100 or less)."
-            }
+        "virtualNetworks_bkusfvmssvnet_name": {
+            "defaultValue": "bkusfvmssvnet",
+            "type": "String"
         },
-        "osType": {
-            "type": "string",
-            "allowedValues": [
-                "Windows",
-                "Linux"
-            ]
+        "storageAccounts_2zlluaecvyreybkusfvmsssa_name": {
+            "defaultValue": "2zlluaecvyreybkusfvmsssa",
+            "type": "String"
         },
-        "scaleInInterval": {
-            "defaultValue": "1",
-            "type": "string"
+        "storageAccounts_tlrydnnvkua7wbkusfvmsssa_name": {
+            "defaultValue": "tlrydnnvkua7wbkusfvmsssa",
+            "type": "String"
         },
-        "diskTypeIfSmall": {
-            "defaultValue": "Unmanaged",
-            "type": "string",
-            "allowedValues": [
-                "Managed",
-                "Unmanaged"
-            ]
+        "storageAccounts_wmhqhrgw4hf6ibkusfvmsssa_name": {
+            "defaultValue": "wmhqhrgw4hf6ibkusfvmsssa",
+            "type": "String"
         },
-        "pipName": {
-            "type": "string"
+        "storageAccounts_ykp7vciux4txibkusfvmsssa_name": {
+            "defaultValue": "ykp7vciux4txibkusfvmsssa",
+            "type": "String"
         },
-        "baseUrl": {
-            "defaultValue": "https://gallery.azure.com/artifact/20151001/microsoft.vmss.4.0.0/Artifacts",
-            "type": "string",
-            "metadata": {
-                "artifactsBaseUrl": "Base URL of the VMSS Template gallery package"
-            }
+        "storageAccounts_znszild7m5bzobkusfvmsssa_name": {
+            "defaultValue": "znszild7m5bzobkusfvmsssa",
+            "type": "String"
         },
-        "singlePlacementGroup": {
-            "defaultValue": "true",
-            "type": "string",
-            "allowedValues": [
-                "true",
-                "false"
-            ]
+        "loadBalancers_bkusfvmsslb_id": {
+            "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmsslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
         },
-        "autoscaleYesOrNo": {
-            "defaultValue": "No",
-            "type": "string",
-            "allowedValues": [
-                "Yes",
-                "No"
-            ]
-        },
-        "location": {
-            "type": "string",
-            "metadata": {
-                "description": "location of resources"
-            }
-        },
-        "username": {
-            "type": "string",
-            "metadata": {
-                "description": "Admin username on all VMs."
-            }
-        },
-        "scaleOutInterval": {
-            "defaultValue": "1",
-            "type": "string"
-        },
-        "vmSku": {
-            "defaultValue": "Standard_D1_v2",
-            "type": "string",
-            "metadata": {
-                "description": "Size of VMs in the VM Scale Set."
-            }
-        },
-        "autoscaleMin": {
-            "defaultValue": "1",
-            "type": "string"
-        },
-        "autoscaleMax": {
-            "defaultValue": "10",
-            "type": "string"
-        },
-        "pipLabel": {
-            "type": "string"
-        },
-        "password": {
-            "defaultValue": "",
-            "type": "securestring",
-            "metadata": {
-                "description": "Admin password on all VMs."
-            }
-        },
-        "scaleOutCPUPercentageThreshold": {
-            "defaultValue": "75",
-            "type": "string"
-        },
-        "vmssName": {
-            "maxLength": 61,
-            "type": "string",
-            "metadata": {
-                "description": "String used as a base for naming resources. Must be 3-61 characters in length and globally unique across Azure. A hash is prepended to this string for some resources, and resource-specific information is appended."
-            }
-        },
-        "sshPublicKey": {
-            "defaultValue": "",
-            "type": "string",
-            "metadata": {
-                "description": "ssh public key for connecting to VMs."
-            }
+        "loadBalancers_bkusfvmsslb_id_1": {
+            "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmsslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+            "type": "String"
         }
     },
+  "variables": {},
     "resources": [
         {
-            "type": "Microsoft.Resources/deployments",
-            "name": "scaleSetPortalDeployment",
-            "apiVersion": "2015-11-01",
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Compute/virtualMachineScaleSets/bkusfvmssworkers'.",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "sku": {
+                "name": "Standard_D2",
+                "tier": "Standard",
+                "capacity": 1
+            },
+            "name": "[parameters('virtualMachineScaleSets_bkusfvmssworkers_name')]",
+            "apiVersion": "2016-04-30-preview",
+            "location": "southcentralus",
             "properties": {
-                "templateLink": {
-                    "contentVersion": "1.0.0.0",
-                    "uri": "[concat(variables('baseTemplateUri'), parameters('autoscaleYesOrNo'), variables('diskType'), parameters('singlePlacementGroup'), '.json')]"
+                "singlePlacementGroup": true,
+                "upgradePolicy": {
+                    "mode": "Manual"
                 },
-                "mode": "Incremental",
-                "parameters": "[variables(concat('parameters', parameters('autoscaleYesOrNo'), variables('diskType')))]"
-            }
+                "virtualMachineProfile": {
+                    "osProfile": {
+                        "computerNamePrefix": "bkusfvmss",
+                        "adminUsername": "bkhatri",
+                        "windowsConfiguration": {
+                            "provisionVMAgent": true,
+                            "enableAutomaticUpdates": true
+                        },
+                        "secrets": []
+                    },
+                    "storageProfile": {
+                        "osDisk": {
+                            "vhdContainers": [
+                                "https://2zlluaecvyreybkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                                "https://tlrydnnvkua7wbkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                                "https://ykp7vciux4txibkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                                "https://wmhqhrgw4hf6ibkusfvmsssa.blob.core.windows.net/bkusfvmssvhd",
+                                "https://znszild7m5bzobkusfvmsssa.blob.core.windows.net/bkusfvmssvhd"
+                            ],
+                            "name": "bkusfvmssosdisk",
+                            "createOption": "FromImage",
+                            "caching": "ReadOnly"
+                        },
+                        "imageReference": {
+                            "publisher": "MicrosoftWindowsServer",
+                            "offer": "WindowsServer",
+                            "sku": "2016-Datacenter-with-Containers",
+                            "version": "latest"
+                        }
+                    },
+                    "networkProfile": {
+                        "networkInterfaceConfigurations": [
+                            {
+                                "name": "bkusfvmssnic",
+                                "properties": {
+                                    "primary": true,
+                                    "ipConfigurations": [
+                                        {
+                                            "name": "bkusfvmssipconfig",
+                                            "properties": {
+                                                "subnet": {
+                                                    "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name')), '/subnets/bkusfvmsssubnet')]"
+                                                },
+                                                "loadBalancerBackendAddressPools": [
+                                                    {
+                                                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmsslb_name')), '/backendAddressPools/bkusfvmssbepool')]"
+                                                    }
+                                                ],
+                                                "loadBalancerInboundNatPools": [
+                                                    {
+                                                        "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmsslb_name')), '/inboundNatPools/bkusfvmssnatpool')]"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "overprovision": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmsslb_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/microsoft.insights/autoscalesettings/cpuautoscale'.",
+            "type": "microsoft.insights/autoscalesettings",
+            "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+            "apiVersion": "2014-04-01",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+                "profiles": [
+                    {
+                        "name": "Profile1",
+                        "capacity": {
+                            "minimum": "1",
+                            "maximum": "3",
+                            "default": "1"
+                        },
+                        "rules": [
+                            {
+                                "metricTrigger": {
+                                    "metricName": "Percentage CPU",
+                                    "metricNamespace": "",
+                                    "metricResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssworkers_name'))]",
+                                    "timeGrain": "PT1M",
+                                    "statistic": "Average",
+                                    "timeWindow": "PT5M",
+                                    "timeAggregation": "Average",
+                                    "operator": "GreaterThan",
+                                    "threshold": 75
+                                },
+                                "scaleAction": {
+                                    "direction": "Increase",
+                                    "type": "ChangeCount",
+                                    "value": "1",
+                                    "cooldown": "PT1M"
+                                }
+                            },
+                            {
+                                "metricTrigger": {
+                                    "metricName": "Percentage CPU",
+                                    "metricNamespace": "",
+                                    "metricResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssworkers_name'))]",
+                                    "timeGrain": "PT1M",
+                                    "statistic": "Average",
+                                    "timeWindow": "PT5M",
+                                    "timeAggregation": "Average",
+                                    "operator": "LessThan",
+                                    "threshold": 25
+                                },
+                                "scaleAction": {
+                                    "direction": "Decrease",
+                                    "type": "ChangeCount",
+                                    "value": "1",
+                                    "cooldown": "PT1M"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "enabled": true,
+                "name": "[parameters('autoscalesettings_cpuautoscale_name')]",
+                "targetResourceUri": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssworkers_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssworkers_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmsslb'.",
+            "type": "Microsoft.Network/loadBalancers",
+            "name": "[parameters('loadBalancers_bkusfvmsslb_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "southcentralus",
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LoadBalancerFrontEnd",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip01_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                  {
+                    "name": "bkusfvmssbepool"
+                  }
+                ],
+                "loadBalancingRules": [],
+                "probes": [],
+                "inboundNatRules": [
+                    {
+                        "name": "bkusfvmssnatpool.0",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_bkusfvmsslb_id')]"
+                            },
+                            "frontendPort": 50000,
+                            "backendPort": 3389,
+                            "protocol": "Tcp"
+                        }
+                    }
+                ],
+                "outboundNatRules": [],
+                "inboundNatPools": [
+                    {
+                        "name": "bkusfvmssnatpool",
+                        "properties": {
+                            "frontendPortRangeStart": 50000,
+                            "frontendPortRangeEnd": 50119,
+                            "backendPort": 3389,
+                            "protocol": "Tcp",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('loadBalancers_bkusfvmsslb_id_1')]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_ip01_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/publicIPAddresses/ip01'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[parameters('publicIPAddresses_ip01_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "southcentralus",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "bkusfworkers"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/virtualNetworks/bkusfvmssvnet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_bkusfvmssvnet_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "southcentralus",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "bkusfvmsssubnet",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/21"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/2zlluaecvyreybkusfvmsssa'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_2zlluaecvyreybkusfvmsssa_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "southcentralus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/tlrydnnvkua7wbkusfvmsssa'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_tlrydnnvkua7wbkusfvmsssa_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "southcentralus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/wmhqhrgw4hf6ibkusfvmsssa'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_wmhqhrgw4hf6ibkusfvmsssa_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "southcentralus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/ykp7vciux4txibkusfvmsssa'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_ykp7vciux4txibkusfvmsssa_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "southcentralus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Storage/storageAccounts/znszild7m5bzobkusfvmsssa'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_znszild7m5bzobkusfvmsssa_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "southcentralus",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
         }
     ]
 }

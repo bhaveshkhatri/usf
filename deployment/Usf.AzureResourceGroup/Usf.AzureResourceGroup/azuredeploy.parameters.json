@@ -1,69 +1,42 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "autoscaleDefault": {
-            "value": "1"
-        },
-        "scaleInCPUPercentageThreshold": {
-            "value": "25"
-        },
-        "authenticationType": {
-            "value": "password"
-        },
-        "image": {
-            "value": "2016-Datacenter-with-Containers"
-        },
-        "vmSku": {
-            "value": "Standard_D2"
-        },
-        "osType": {
-            "value": "Windows"
-        },
-        "scaleInInterval": {
-            "value": "1"
-        },
-        "diskTypeIfSmall": {
-            "value": "Unmanaged"
-        },
-        "pipName": {
-            "value": "ip01"
-        },
-        "singlePlacementGroup": {
-            "value": "true"
-        },
-        "autoscaleYesOrNo": {
-            "value": "Yes"
-        },
-        "location": {
-            "value": "southcentralus"
-        },
-        "username": {
-            "value": "bkhatri"
-        },
-        "scaleOutInterval": {
-            "value": "1"
-        },
-        "instanceCount": {
-            "value": "1"
-        },
-        "autoscaleMin": {
-            "value": "1"
-        },
-        "autoscaleMax": {
-            "value": "3"
-        },
-        "pipLabel": {
-            "value": "bkusfworkers"
-        },
-        "password": {
-            "value": null
-        },
-        "scaleOutCPUPercentageThreshold": {
-            "value": "75"
-        },
-        "vmssName": {
-            "value": "bkusfvmssworkers"
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualMachineScaleSets_bkusfvmssworkers_name": {
+      "value": null
+    },
+    "autoscalesettings_cpuautoscale_name": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmsslb_name": {
+      "value": null
+    },
+    "publicIPAddresses_ip01_name": {
+      "value": null
+    },
+    "virtualNetworks_bkusfvmssvnet_name": {
+      "value": null
+    },
+    "storageAccounts_2zlluaecvyreybkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_tlrydnnvkua7wbkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_wmhqhrgw4hf6ibkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_ykp7vciux4txibkusfvmsssa_name": {
+      "value": null
+    },
+    "storageAccounts_znszild7m5bzobkusfvmsssa_name": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmsslb_id": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmsslb_id_1": {
+      "value": null
     }
+  }
 }
