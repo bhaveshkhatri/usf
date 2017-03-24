@@ -53,12 +53,6 @@
     "storageAccounts_managers05_name": {
       "value": null
     },
-    "loadBalancers_bkusfvmssworkerslb_name": {
-      "value": null
-    },
-    "loadBalancers_bkusfvmssworkerslb_id": {
-      "value": null
-    },
     "loadBalancers_bkusfvmssmanagerslb_name": {
       "value": null
     },
