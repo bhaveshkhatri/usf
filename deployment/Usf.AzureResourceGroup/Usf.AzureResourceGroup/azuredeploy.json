@@ -418,28 +418,28 @@
                 }
               }
             ]
-          }
-        },
-        "extensionProfile": {
-          "extensions": [
-            {
-              "name": "customScript",
-              "properties": {
-                "publisher": "Microsoft.Compute",
-                "settings": {
-                  "fileUris": [
-                    "[concat(parameters('artifacts_location'), '/scripts/manager.ps1')]"
-                  ]
-                },
-                "typeHandlerVersion": "1.8",
-                "autoUpgradeMinorVersion": true,
-                "protectedSettings": {
-                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File manager.ps1"
-                },
-                "type": "CustomScriptExtension"
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "customScript",
+                "properties": {
+                  "publisher": "Microsoft.Compute",
+                  "settings": {
+                    "fileUris": [
+                      "[concat(parameters('artifacts_location'), '/scripts/manager.ps1')]"
+                    ]
+                  },
+                  "typeHandlerVersion": "1.8",
+                  "autoUpgradeMinorVersion": true,
+                  "protectedSettings": {
+                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File manager.ps1"
+                  },
+                  "type": "CustomScriptExtension"
+                }
               }
-            }
-          ]
+            ]
+          }
         },
         "overprovision": true
       },
