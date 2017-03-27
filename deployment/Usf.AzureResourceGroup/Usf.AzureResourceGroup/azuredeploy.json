@@ -2,6 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "artifacts_location": {
+      "defaultValue": "https://raw.githubusercontent.com/bhaveshkhatri/usf/master/deployment/Usf.AzureResourceGroup/Usf.AzureResourceGroup",
+      "type": "string",
+      "metadata": {
+        "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+      }
+    },
     "vm_admin_password": {
       "type": "securestring",
       "minLength": 8,
@@ -170,6 +177,27 @@
                       }
                     }
                   ]
+                }
+              }
+            ]
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "customScript",
+                "properties": {
+                  "publisher": "Microsoft.Compute",
+                  "settings": {
+                    "fileUris": [
+                      "[concat(parameters('artifacts_location'), '/scripts/worker.ps1')]"
+                    ]
+                  },
+                  "typeHandlerVersion": "1.8",
+                  "autoUpgradeMinorVersion": true,
+                  "protectedSettings": {
+                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File worker.ps1"
+                  },
+                  "type": "CustomScriptExtension"
                 }
               }
             ]
@@ -391,6 +419,27 @@
               }
             ]
           }
+        },
+        "extensionProfile": {
+          "extensions": [
+            {
+              "name": "customScript",
+              "properties": {
+                "publisher": "Microsoft.Compute",
+                "settings": {
+                  "fileUris": [
+                    "[concat(parameters('artifacts_location'), '/scripts/manager.ps1')]"
+                  ]
+                },
+                "typeHandlerVersion": "1.8",
+                "autoUpgradeMinorVersion": true,
+                "protectedSettings": {
+                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File manager.ps1"
+                },
+                "type": "CustomScriptExtension"
+              }
+            }
+          ]
         },
         "overprovision": true
       },

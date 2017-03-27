@@ -1,0 +1,1 @@
+Write-Host "Master node says: 'Hello World!'"
