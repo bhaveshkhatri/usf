@@ -1,1 +1,1 @@
-Write-Host "Master node says: 'Hello World!'"
+Write-Host "Manager node says: 'Hello World!'"
