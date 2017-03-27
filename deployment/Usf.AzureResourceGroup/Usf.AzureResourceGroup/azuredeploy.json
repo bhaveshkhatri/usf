@@ -423,17 +423,6 @@
         "loadBalancingRules": [],
         "probes": [],
         "inboundNatRules": [
-          //{
-          //  "name": "bkusfvmssnatpool.0",
-          //  "properties": {
-          //    "frontendIPConfiguration": {
-          //      "id": "[parameters('loadBalancers_bkusfvmssmanagerslb_id')]"
-          //    },
-          //    "frontendPort": 50000,
-          //    "backendPort": 3389,
-          //    "protocol": "Tcp"
-          //  }
-          //}
         ],
         "outboundNatRules": [],
         "inboundNatPools": [
