@@ -270,6 +270,7 @@
           "osProfile": {
             "computerNamePrefix": "managers",
             "adminUsername": "bkhatri",
+            "adminPassword": "[parameters('vm_admin_password')]",
             "windowsConfiguration": {
               "provisionVMAgent": true,
               "enableAutomaticUpdates": true
