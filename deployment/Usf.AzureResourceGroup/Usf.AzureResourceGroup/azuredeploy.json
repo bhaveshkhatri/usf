@@ -100,7 +100,7 @@
         },
         "virtualMachineProfile": {
           "osProfile": {
-            "computerNamePrefix": "bkusfvmssworkers",
+            "computerNamePrefix": "workers",
             "adminUsername": "bkhatri",
             "windowsConfiguration": {
               "provisionVMAgent": true,
@@ -260,7 +260,7 @@
         },
         "virtualMachineProfile": {
           "osProfile": {
-            "computerNamePrefix": "bkusfvmssmanagers",
+            "computerNamePrefix": "managers",
             "adminUsername": "bkhatri",
             "windowsConfiguration": {
               "provisionVMAgent": true,
