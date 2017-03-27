@@ -2,6 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "vm_admin_password": {
+      "type": "securestring",
+      "minLength": 8,
+      "metadata": {
+        "description": "Local administrator password, complex password is required."
+      }
+    },
     "virtualMachineScaleSets_bkusfvmssworkers_name": {
       "defaultValue": "bkusfvmssworkers",
       "type": "String"
@@ -102,6 +109,7 @@
           "osProfile": {
             "computerNamePrefix": "workers",
             "adminUsername": "bkhatri",
+            "adminPassword": "[parameters('vm_admin_password')]",
             "windowsConfiguration": {
               "provisionVMAgent": true,
               "enableAutomaticUpdates": true
