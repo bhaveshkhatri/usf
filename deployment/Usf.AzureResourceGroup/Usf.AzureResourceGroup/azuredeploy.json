@@ -84,6 +84,14 @@
     "loadBalancers_bkusfvmssmanagerslb_id": {
       "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmssmanagerslb/frontendIPConfigurations/LoadBalancerFrontEnd",
       "type": "String"
+    },
+    "loadBalancers_bkusfvmssworkerslb_name": {
+      "defaultValue": "bkusfvmssworkerslb",
+      "type": "String"
+    },
+    "loadBalancers_bkusfvmssworkerslb_id": {
+      "defaultValue": "/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmssworkerslb/frontendIPConfigurations/LoadBalancerFrontEnd",
+      "type": "String"
     }
   },
   "variables": {},
@@ -148,7 +156,17 @@
                       "properties": {
                         "subnet": {
                           "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name')), '/subnets/bkusfvmsssubnet')]"
-                        }
+                        },
+                        "loadBalancerBackendAddressPools": [
+                          {
+                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name')), '/backendAddressPools/bkusfvmssbepool')]"
+                          }
+                        ],
+                        "loadBalancerInboundNatPools": [
+                          {
+                            "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name')), '/inboundNatPools/bkusfvmssnatpool')]"
+                          }
+                        ]
                       }
                     }
                   ]
@@ -161,6 +179,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
+        "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers01_name'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers02_name'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_workers03_name'))]",
@@ -232,6 +251,51 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssworkers_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Network/loadBalancers/bkusfvmssworkerslb'.",
+      "type": "Microsoft.Network/loadBalancers",
+      "name": "[parameters('loadBalancers_bkusfvmssworkerslb_name')]",
+      "apiVersion": "2016-03-30",
+      "location": "southcentralus",
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_workersip01_name'))]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "bkusfvmssbepool"
+          }
+        ],
+        "loadBalancingRules": [],
+        "probes": [],
+        "outboundNatRules": [],
+        "inboundNatPools": [
+          {
+            "name": "bkusfvmssnatpool",
+            "properties": {
+              "frontendPortRangeStart": 50000,
+              "frontendPortRangeEnd": 50119,
+              "backendPort": 3389,
+              "protocol": "Tcp",
+              "frontendIPConfiguration": {
+                "id": "[parameters('loadBalancers_bkusfvmssworkerslb_id')]"
+              }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_workersip01_name'))]"
       ]
     },
     {

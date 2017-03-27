@@ -61,6 +61,12 @@
     },
     "loadBalancers_bkusfvmssmanagerslb_id": {
       "value": null
+    },
+    "loadBalancers_bkusfvmssworkerslb_name": {
+      "value": null
+    },
+    "loadBalancers_bkusfvmssworkerslb_id": {
+      "value": null
     }
   }
 }
