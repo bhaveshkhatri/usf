@@ -43,7 +43,7 @@ Write-Host 'Manager IP:          ' $ipAddress
 Write-Host 'Manager Port:        ' $port
 
 Connect-RedisServer -Host $RedisHost -Port 6379
-Send-RedisCommand "auth " + $RedisPassword
-Send-RedisCommand "set managerJoinToken " + $managerJoinToken
-Send-RedisCommand "set workerJoinToken " + $workerJoinToken
+Send-RedisCommand "auth $($RedisPassword)"
+Send-RedisCommand "set managerJoinToken $($managerJoinToken)"
+Send-RedisCommand "set workerJoinToken $($workerJoinToken)"
 Disconnect-RedisServer
