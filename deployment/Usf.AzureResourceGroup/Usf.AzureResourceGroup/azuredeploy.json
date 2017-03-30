@@ -2,6 +2,10 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "redis_bkusfredis_name": {
+      "defaultValue": "bkusfredis1",
+      "type": "String"
+    },
     "artifacts_location": {
       "defaultValue": "https://raw.githubusercontent.com/bhaveshkhatri/usf/master/deployment/Usf.AzureResourceGroup/Usf.AzureResourceGroup",
       "type": "string",
@@ -206,6 +210,7 @@
         "overprovision": true
       },
       "dependsOn": [
+        "[resourceId('Microsoft.Cache/Redis', parameters('redis_bkusfredis_name'))]",
         "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('virtualMachineScaleSets_bkusfvmssmanagers_name'))]",
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
         "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssworkerslb_name'))]",
@@ -434,7 +439,7 @@
                   "typeHandlerVersion": "1.8",
                   "autoUpgradeMinorVersion": true,
                   "protectedSettings": {
-                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File manager.ps1 true"
+                    "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File manager.ps1 true ', concat(parameters('redis_bkusfredis_name'),'.redis.cache.windows.net'), ' ', listKeys(resourceId('Microsoft.Cache/Redis', parameters('redis_bkusfredis_name')), '2016-04-01').primaryKey)]"
                   },
                   "type": "CustomScriptExtension"
                 }
@@ -445,6 +450,7 @@
         "overprovision": true
       },
       "dependsOn": [
+        "[resourceId('Microsoft.Cache/Redis', parameters('redis_bkusfredis_name'))]",
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_bkusfvmssvnet_name'))]",
         "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_bkusfvmssmanagerslb_name'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_managers01_name'))]",
@@ -754,6 +760,31 @@
       "location": "southcentralus",
       "tags": {},
       "properties": {},
+      "dependsOn": []
+    },
+    //REDIS
+    {
+      "comments": "Generalized from resource: '/subscriptions/1735d8d7-c71a-4e1c-8d5e-502dee5310d2/resourceGroups/bkusf/providers/Microsoft.Cache/Redis/bkusfredis'.",
+      "type": "Microsoft.Cache/Redis",
+      "name": "[parameters('redis_bkusfredis_name')]",
+      "apiVersion": "2016-04-01",
+      "location": "southcentralus",
+      "tags": {},
+      "properties": {
+        "redisVersion": "3.2",
+        "sku": {
+          "name": "Standard",
+          "family": "C",
+          "capacity": 0
+        },
+        "enableNonSslPort": true,
+        "redisConfiguration": {
+          "maxclients": "256",
+          "maxmemory-reserved": "2",
+          "maxfragmentationmemory-reserved": "12",
+          "maxmemory-delta": "2"
+        }
+      },
       "dependsOn": []
     }
   ]
