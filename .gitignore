@@ -5,5 +5,8 @@
 *.dg
 *.suo
 *.user
-*\**\bin\*
+*/**/bin/**/*
+*/**/obj/**/*
 *.TMP
+/src/**/Backup
+/src/**/Backup
